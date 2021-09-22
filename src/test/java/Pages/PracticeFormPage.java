@@ -30,15 +30,16 @@ public class PracticeFormPage {
     @FindBy (id = "submit")
     public WebElement submitButton;
 
-
+    @FindBy (id = "example-modal-sizes-title-lg")
+    public WebElement successMessage;
 
     public void chooseGender(String gender){
         String path = "//*[@id='genterWrapper']//*[@value='"+gender+"']";
         BrowserUtilities.clickWithJS(Driver.get().findElement(By.xpath(path)));
     }
 
-    public void chooseHobby(String hobby){
-        String path = "//*[@id='hobbiesWrapper']//label[.='"+hobby+"']/preceding-sibling::*";
+    public void chooseHobby(String hobby) {
+        String path = "//*[@id='hobbiesWrapper']//label[.='" + hobby + "']/preceding-sibling::*";
         BrowserUtilities.clickWithJS(Driver.get().findElement(By.xpath(path)));
     }
 

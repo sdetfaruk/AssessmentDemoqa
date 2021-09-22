@@ -5,6 +5,8 @@ import Utilities.BrowserUtilities;
 import Utilities.ConfigurationReader;
 import Utilities.Driver;
 import io.cucumber.java.en.*;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 
 public class PracticeFormStepDefs {
 
@@ -30,24 +32,46 @@ public class PracticeFormStepDefs {
     public void the_user_choses_gender(String gender) {
         new PracticeFormPage().chooseGender(gender);
     }
+
     @When("The user fills subject {string}")
     public void the_user_fills_subject(String subject) {
-        new PracticeFormPage().subject.sendKeys(subject);
+        if (!subject.isEmpty()) {
+            new PracticeFormPage().subject.sendKeys(subject);
+        }
     }
+
     @When("The user fills hobbies {string}")
     public void the_user_fills_hobbies(String hobby) {
-        new PracticeFormPage().chooseHobby(hobby);
-        BrowserUtilities.waitFor(2);
+        if(!hobby.isEmpty()) {
+            new PracticeFormPage().chooseHobby(hobby);
+        }
     }
     @When("The user clicks the submit button")
     public void the_user_clicks_the_submit_button() {
-        new PracticeFormPage().submitButton.click();
-        BrowserUtilities.waitFor(5);
+        PracticeFormPage practiceFormPage = new PracticeFormPage();
+        BrowserUtilities.clickWithJS(practiceFormPage.submitButton);
+        BrowserUtilities.waitForVisibility(practiceFormPage.successMessage,5);
     }
+
+    @When("The user clicks the submit button with invalid data")
+    public void the_user_clicks_the_submit_button_with_invalid_data() {
+        PracticeFormPage practiceFormPage = new PracticeFormPage();
+        BrowserUtilities.clickWithJS(practiceFormPage.submitButton);
+    }
+
     @Then("The user should see the popup window with form details")
     public void the_user_should_see_the_popup_window_with_form_details() {
-        System.out.println("verify");
+        String expectedText = "Thanks for submitting the form";
+        String actualText = new PracticeFormPage().successMessage.getText();
+        Assert.assertEquals(expectedText, actualText);
     }
+
+    @Then("The user should not be able to submit the form")
+    public void the_user_should_not_be_able_to_submit_the_form() {
+//        BrowserUtilities.verifyElementNotDisplayed(By.id("example-modal-sizes-title-lg"));
+        Assert.assertTrue(Driver.get().findElements(By.id("example-modal-sizes-title-lg")).size()<1);
+    }
+
 
 
 }
