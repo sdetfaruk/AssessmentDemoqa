@@ -11,7 +11,7 @@
 #•	All other fields
 #
 #When the form is successfully sent a popup is displayed showing all information that was sent.
-
+@wip
 Feature: Practice form
   @positive
   Scenario Outline: The user submits the form with valid data
@@ -32,7 +32,6 @@ Feature: Practice form
       | Alan       | Dylon     | Male   | alan_dylon@adsdasd.com | 4938274635 | subject 1 |         |
       | Alan       | Dylon     | Male   | alan_dylon@adsdasd.com | 4938274635 |           |         |
 
-  @wip
     @negative
   Scenario Outline: The user submits the form with invalid data
     Given The user is on the practice form page
