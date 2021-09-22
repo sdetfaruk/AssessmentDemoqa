@@ -68,7 +68,6 @@ public class PracticeFormStepDefs {
 
     @Then("The user should not be able to submit the form")
     public void the_user_should_not_be_able_to_submit_the_form() {
-//        BrowserUtilities.verifyElementNotDisplayed(By.id("example-modal-sizes-title-lg"));
         Assert.assertTrue(Driver.get().findElements(By.id("example-modal-sizes-title-lg")).size()<1);
     }
 

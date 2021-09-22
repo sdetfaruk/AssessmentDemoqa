@@ -28,14 +28,5 @@ public class BrowserUtilities {
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static void verifyElementNotDisplayed(By by) {
-        try {
-            Assert.assertFalse("Element should not be visible: " + by, Driver.get().findElement(by).isDisplayed());
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-
-        }
-    }
-
 
 }
